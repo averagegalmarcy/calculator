@@ -1,29 +1,56 @@
 <template>
   <div class="calculator">
-    <div class="display"> Display </div>
-    <div> C </div>
-    <div> +/- </div>
-    <div> % </div>
-    <div> ÷ </div>
-    <div> Hello </div>
-    <div> Hello </div>
-    <div> Hello </div>
-    <div> Hello </div>
-    <div> Hello </div>
-    <div> Hello </div>
-    <div> Hello </div>
-    <div> Hello </div>
+    <div class="display"> {{current || '0'}} </div>
+    <div @click="clear" class="button"> C </div>
+    <div @click="sign" class="button"> +/- </div>
+    <div @click="percent" class="button"> % </div>
+    <div @click="divide" class="button operator"> ÷ </div>
+    <div @click="append" class="button"> 7 </div>
+    <div @click="append" class="button"> 8 </div>
+    <div @click="append" class="button"> 9 </div>
+    <div class="button operator"> x </div>
+    <div @click="append" class="button"> 4 </div>
+    <div @click="append" class="button"> 5 </div>
+    <div @click="append" class="button"> 6 </div>
+    <div class="button operator"> - </div>
+    <div @click="append" class="button"> 1 </div>
+    <div @click="append" class="button"> 2 </div>
+    <div @click="append" class="button"> 3 </div>
+    <div class="button operator"> + </div>
+    <div @click="append" class="button , zero"> 0 </div>
+    <div class="button"> . </div>
+    <div class="button operator"> = </div>
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  data() {
+    return {
+      current: ''
+    }
+  },
+  methods: {
+    clear() {
+      this.current = '';
+    },
+    sign() {
+      this.current = this.current.charAt(0) === '-' ? 
+        this.current.slice(1) : `-${this.current}`;
+    },
+    percent() {
+      this.current = `${parseFloat(this.current)/ 100}`;
+    },
+    append(number) {
+      this.current = `${this.current}${number}`;
+    }
+  }
+};
 </script>
 
 <style scoped>
 .calculator {
+  width:400px;
   font-size: 20pt;
   display: grid;
   grid-template-columns: repeat(4, 1fr); 
@@ -31,7 +58,22 @@ export default {
 }
 .display {
   grid-column: 1 / 5;
-  background-color: red;
+  background-color:black;
+  color: white;
   text-align: center;
+  border-radius:5pt;
+}
+.zero {
+  grid-column: 1 / 3;
+}
+.button {
+  background-color:#F2F2F2;
+  border: 1px solid lightgrey;
+  border-radius:5pt;
+  text-align: center;
+}
+.operator {
+  background-color:orange;
+  color: white;
 }
 </style>
