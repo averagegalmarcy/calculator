@@ -4,21 +4,21 @@
     <div @click="clear" class="button"> C </div>
     <div @click="sign" class="button"> +/- </div>
     <div @click="percent" class="button"> % </div>
-    <div @click="divide" class="button operator"> ÷ </div>
-    <div @click="append" class="button"> 7 </div>
-    <div @click="append" class="button"> 8 </div>
-    <div @click="append" class="button"> 9 </div>
+    <div class="button operator"> ÷ </div>
+    <div @click="append('7')" class="button"> 7 </div>
+    <div @click="append('8')" class="button"> 8 </div>
+    <div @click="append('9')" class="button"> 9 </div>
     <div class="button operator"> x </div>
-    <div @click="append" class="button"> 4 </div>
-    <div @click="append" class="button"> 5 </div>
-    <div @click="append" class="button"> 6 </div>
+    <div @click="append('4')" class="button"> 4 </div>
+    <div @click="append('5')" class="button"> 5 </div>
+    <div @click="append('6')" class="button"> 6 </div>
     <div class="button operator"> - </div>
-    <div @click="append" class="button"> 1 </div>
-    <div @click="append" class="button"> 2 </div>
-    <div @click="append" class="button"> 3 </div>
+    <div @click="append('1')" class="button"> 1 </div>
+    <div @click="append('2')" class="button"> 2 </div>
+    <div @click="append('3')" class="button"> 3 </div>
     <div class="button operator"> + </div>
-    <div @click="append" class="button , zero"> 0 </div>
-    <div class="button"> . </div>
+    <div @click="append('0')" class="button , zero"> 0 </div>
+    <div @click="dot" class="button"> . </div>
     <div class="button operator"> = </div>
   </div>
 </template>
@@ -43,6 +43,11 @@ export default {
     },
     append(number) {
       this.current = `${this.current}${number}`;
+    },
+    dot() {
+      if(this.current.indexOf('.') === -1) {
+        this.append('.');
+      }
     }
   }
 };
